@@ -5,14 +5,11 @@ st.title("🕒 Arrest Duration Calculator")
 
 input_date = st.text_input("Enter the date the arrest starts (DD/MM/YYYY):")
 arrest_length=0
-on = st.toggle("DAYS" if st.session_state.get("DAYS/MONTHS_on", True)
-                         else "MONTHS")
+on = st.toggle("DAYS/MONTHS",True)
 
-##st.session_state["DAYS/MONTHS_on"] = on
 
 
 if on:
-    st.session_state["DAYS/MONTHS_on"] = True
     st.write("You have selected the duration of arrest in days.")
     arrest_length = st.number_input("Enter the length of the arrest in days:", min_value=1, step=1)
     if input_date:
@@ -24,7 +21,6 @@ if on:
             st.error("Invalid date format. Please use DD/MM/YYYY.")
 
 else:
-    st.session_state["DAYS/MONTHS_on"] = False
     st.write("You have selected the duration of arrest in months.")
     arrest_length = st.number_input("Enter the length of the arrest in months:", min_value=1, step=1)
     if input_date:
