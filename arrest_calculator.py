@@ -12,6 +12,7 @@ on = st.toggle("DAYS" if st.session_state.get("DAYS/MONTHS_on", True)
 
 
 if on:
+    st.markdown("DAYS")
     st.write("You have selected the duration of arrest in days.")
     arrest_length = st.number_input("Enter the length of the arrest in days:", min_value=1, step=1)
     if input_date:
@@ -23,6 +24,7 @@ if on:
             st.error("Invalid date format. Please use DD/MM/YYYY.")
 
 else:
+    st.markdown("MONTHS")
     st.write("You have selected the duration of arrest in months.")
     arrest_length = st.number_input("Enter the length of the arrest in months:", min_value=1, step=1)
     if input_date:
