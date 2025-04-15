@@ -13,8 +13,7 @@ if on:
     if input_date:
         try:
             date_obj = datetime.strptime(input_date, "%d/%m/%Y").date()
-            end_date_days = date_obj + timedelta(days=(int(arrest_length) - 1))
-            end_date_months=date_obj + timedelta(months=(arrest_length - 1))
+            end_date = date_obj + timedelta(days=(int(arrest_length) - 1))
             st.success(f"The last day of the arrest is: {end_date.strftime('%d/%m/%Y')}")
         except ValueError:
             st.error("Invalid date format. Please use DD/MM/YYYY.")
@@ -25,7 +24,7 @@ else:
     if input_date:
         try:
             date_obj = datetime.strptime(input_date, "%d/%m/%Y").date()
-            end_date = date_obj + timedelta(months=(arrest_length))
+            end_date = date_obj + timedelta(months=int(arrest_length))
             st.success(f"The last day of the arrest is: {end_date.strftime('%d/%m/%Y')}")
         except ValueError:
             st.error("Invalid date format. Please use DD/MM/YYYY.")
