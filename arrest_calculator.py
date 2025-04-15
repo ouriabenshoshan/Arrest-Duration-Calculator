@@ -24,7 +24,7 @@ else:
     if input_date:
         try:
             date_obj = datetime.strptime(input_date, "%d/%m/%Y").date()
-            end_date = date_obj + timedelta(months=int(arrest_length))
+            end_date = date_obj + timedelta(months=(int(arrest_length)))
             st.success(f"The last day of the arrest is: {end_date.strftime('%d/%m/%Y')}")
         except ValueError:
             st.error("Invalid date format. Please use DD/MM/YYYY.")
