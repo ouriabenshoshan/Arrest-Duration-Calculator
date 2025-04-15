@@ -5,7 +5,11 @@ st.title("🕒 Arrest Duration Calculator")
 
 input_date = st.text_input("Enter the date the arrest starts (DD/MM/YYYY):")
 arrest_length=0
-on = st.toggle("dauration of arrest in days", value=True)
+on = st.toggle("DAYS" if st.session_state.get("DAYS/MONTHS_on", True)
+                         else "MONTHS")
+
+st.session_state["DAYS/MONTHS_on"] = on
+
 
 if on:
     st.write("You have selected the duration of arrest in days.")
