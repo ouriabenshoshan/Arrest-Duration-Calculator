@@ -8,7 +8,7 @@ arrest_length=0
 on = st.toggle("DAYS" if st.session_state.get("DAYS/MONTHS_on", True)
                          else "MONTHS")
 
-st.session_state["DAYS/MONTHS_on"] = on
+##st.session_state["DAYS/MONTHS_on"] = on
 
 
 if on:
