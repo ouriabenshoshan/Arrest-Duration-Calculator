@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime, timedelta
+import calendar
 
 st.title("🕒 Arrest Duration Calculator")
 
@@ -26,7 +27,26 @@ else:
     if input_date:
         try:
             date_obj = datetime.strptime(input_date, "%d/%m/%Y").date()
-            end_date = date_obj + timedelta(months=(int(arrest_length)))
+            # Calculate the end date by adding the number of months to the start date
+            month = date_obj.month + int(arrest_length)
+            year = date_obj.year + (month) // 12
+            month = month % 12
+            if month == 0:
+                month = 12
+                year -= 1
+            day= date_obj.day
+            if day!=1:
+                day-=1
+            else:
+                if month!=1:
+                    month-=1
+                    day=calendar.monthrange(year,month)[1]
+                else:
+                    month=12
+                    year-=1
+                    day=calendar.monthrange(year,month)[1]
+                    
+            end_date = date_obj.replace(year=year, month=month, day=day)
             st.success(f"The last day of the arrest is: {end_date.strftime('%d/%m/%Y')}")
         except ValueError:
             st.error("Invalid date format. Please use DD/MM/YYYY.")
