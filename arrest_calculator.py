@@ -5,6 +5,7 @@ import calendar
 st.title("🕒 Arrest Duration Calculator")
 
 input_date = st.text_input("Enter the date the arrest starts (DD/MM/YYYY):")
+date_obj = datetime.strptime(input_date, "%d/%m/%Y").date()
 arrest_length=0
 on = st.toggle("DAYS/MONTHS",True)
 
@@ -15,7 +16,7 @@ if on:
     arrest_length = st.number_input("Enter the length of the arrest in days:", min_value=1, step=1)
     if input_date:
         try:
-            date_obj = datetime.strptime(input_date, "%d/%m/%Y").date()
+            
             end_date = date_obj + timedelta(days=(int(arrest_length) - 1))
             st.success(f"The last day of the arrest is: {end_date.strftime('%d/%m/%Y')}")
         except ValueError:
@@ -26,7 +27,6 @@ else:
     arrest_length = st.number_input("Enter the length of the arrest in months:", min_value=1, step=1)
     if input_date:
         try:
-            date_obj = datetime.strptime(input_date, "%d/%m/%Y").date()
             # Calculate the end date by adding the number of months to the start date
             month = date_obj.month + int(arrest_length)
             year = date_obj.year + (month) // 12
@@ -45,7 +45,7 @@ else:
                     month=12
                     year-=1
                     day=calendar.monthrange(year,month)[1]
-                    
+
             end_date = date_obj.replace(year=year, month=month, day=day)
             st.success(f"The last day of the arrest is: {end_date.strftime('%d/%m/%Y')}")
         except ValueError:
